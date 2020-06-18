@@ -24,7 +24,7 @@ namespace Sanitizer
 
         public string Process(string input)
         {
-
+            throw new NotImplementedException();
         }
 
     }
