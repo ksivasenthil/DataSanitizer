@@ -6,6 +6,7 @@ namespace Sanitizer
     public class Pipeline
     {
         public List<IProcessor> SequentialProcessor { get; }
+        public List<ProcessorResult> Results { get; private set;}
         public Pipeline()
         {
             throw new NotImplementedException();
@@ -21,7 +22,7 @@ namespace Sanitizer
             throw new NotImplementedException();
         }
 
-        public void Process()
+        public string Process(string input)
         {
 
         }

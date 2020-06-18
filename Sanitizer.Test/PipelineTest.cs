@@ -73,7 +73,7 @@ namespace Sanitizer.Test
             TestSubject.AddProcessor(sample3);
 
             TestSubject.Process(input);
-            Assert.True(3 == TestSubject.ProcessorResults);
+            Assert.True(3 == TestSubject.Results);
             //TODO: Each handler result should be captured and appended to a common property.
         }
 
