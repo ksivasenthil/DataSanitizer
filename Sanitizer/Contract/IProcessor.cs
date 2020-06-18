@@ -4,7 +4,7 @@ namespace Sanitizer.Contract
     {
         string Process(string source, string pattern);
 
-        void Next();
+        void Next(IProcessor nextInChain);
 
     }
 }
