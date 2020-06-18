@@ -3,6 +3,7 @@ using Xunit;
 using Sanitizer;
 using Sanitizer.Contract;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Sanitizer.Test
 {
@@ -20,7 +21,7 @@ namespace Sanitizer.Test
         {
             string input = "\r\n Hello$World \r\n";
             string pattern1 = "\r\n";
-            string pattern2 = "\$";
+            string pattern2 = "\\$";
             IProcessor sample1 = new StringProcessor(pattern1);
             IProcessor sample2 = new StringProcessor(pattern2);
 
@@ -32,7 +33,7 @@ namespace Sanitizer.Test
             List<int> numbers = new List<int>() { 1, 2 };
 
             List<int> processingOrder = TestSubject
-                .ProcessResults
+                .Results
                 .Select(r => r.ProcessIndex).ToList();
 
             Assert.Equal(numbers.GetHashCode(), processingOrder.GetHashCode());
@@ -44,7 +45,7 @@ namespace Sanitizer.Test
         {
             string input = "\r\n This is a &quot; setup &quot; \r\n";
             string pattern1 = "\r\n";
-            string pattern2 = "\&q/uot;";
+            string pattern2 = "\\&q/uot;";
 
             IProcessor sample1 = new StringProcessor(pattern1);
             IProcessor sample2 = new StringProcessor(pattern2);
@@ -61,8 +62,8 @@ namespace Sanitizer.Test
         {
             string input = "\r\n &quot;Hello$World&quot; \r\n";
             string pattern1 = "\r\n";
-            string pattern2 = "\$";
-            string pattern3 = "\&quot;";
+            string pattern2 = "\\$";
+            string pattern3 = "\\&quot;";
 
             IProcessor sample1 = new StringProcessor(pattern1);
             IProcessor sample2 = new StringProcessor(pattern2);
@@ -73,7 +74,7 @@ namespace Sanitizer.Test
             TestSubject.AddProcessor(sample3);
 
             TestSubject.Process(input);
-            Assert.True(3 == TestSubject.Results);
+            Assert.True(3 == TestSubject.Results.Count);
             //TODO: Each handler result should be captured and appended to a common property.
         }
 
@@ -82,7 +83,7 @@ namespace Sanitizer.Test
         {
             string input = "\r\n Hello$World \r\n";
             string pattern1 = "\r\n";
-            string pattern2 = "\$";
+            string pattern2 = "\\$";
             IProcessor sample1 = new StringProcessor(pattern1);
             IProcessor sample2 = new StringProcessor(pattern2);
 
