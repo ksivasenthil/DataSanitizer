@@ -45,7 +45,7 @@ namespace Sanitizer
             {
                 string processOutput = default(string);
                 Regex matcher = new Regex(this.PatternToFind);
-                processOutput = matcher.Replace(source, string.Empty);
+                processOutput = matcher.Replace(source, replacement);
                 bool thereAreMoreProcessor = null != this.NextInChain;
                 if (thereAreMoreProcessor)
                 {
