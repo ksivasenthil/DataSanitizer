@@ -17,6 +17,48 @@ namespace Sanitizer.Test
         }
 
         [Fact]
+        public void AddProcessorSwellsTheProcessingChainBy1()
+        {
+            string pattern1 = "\r\n";
+            IProcessor sample1 = new StringProcessor(pattern1);
+
+            TestSubject.AddProcessor(sample1);
+
+            Assert.True(1 == TestSubject.SequentialProcessor.Count);
+        }
+
+        [Fact]
+        public void RemoveProcessorDeflatesTheProcessingChainBy1()
+        {
+            string pattern1 = "\r\n";
+            IProcessor sample1 = new StringProcessor(pattern1);
+
+            TestSubject.AddProcessor(sample1);
+
+            TestSubject.RemoveProcessor(1);
+
+            Assert.True(0 == TestSubject.SequentialProcessor.Count);
+        }
+
+
+        [Fact]
+        public void RemoveProcessorRemovesAtCorrectIndex()
+        {
+            string pattern1 = "\r\n";
+            string pattern2 = "\\$";
+
+            IProcessor sample1 = new StringProcessor(pattern1);
+            IProcessor sample2 = new StringProcessor(pattern2);
+
+            TestSubject.AddProcessor(sample1);
+            TestSubject.AddProcessor(sample2);
+
+            TestSubject.RemoveProcessor(2);
+
+            Assert.Same(sample1, TestSubject.SequentialProcessor[0]);
+        }
+
+        [Fact]
         public void CallAllHandlersSequentially()
         {
             string input = "\r\n Hello$World \r\n";
