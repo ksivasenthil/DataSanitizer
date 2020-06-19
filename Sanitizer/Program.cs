@@ -16,12 +16,14 @@
         }
         public Pipeline SetupPipeline()
         {
-            StringProcessor removeQuotes = new StringProcessor("&quot;", 0);
-            StringProcessor removeStartingSpaces = new StringProcessor(@"^\s*\r\n\s*\b",1);
-            StringProcessor removeTrailingSpaces = new StringProcessor(@"\b\s*\r\n\s*$",2);
+            StringProcessor removeQuotes = new StringProcessor("&quot;", 0, "'");
+            StringProcessor removeConsecutiveSpaces = new StringProcessor(@"\b\s+\b",1," ");
+            StringProcessor removeStartingSpaces = new StringProcessor(@"^[\r\n\s]+(?=[\b\'])",2,"");
+            StringProcessor removeTrailingSpaces = new StringProcessor(@"(?<=\b)[\r\n\s]+$",3, "");
 
             Pipeline sanitizeJsonKeys = new Pipeline();
             sanitizeJsonKeys.AddProcessor(removeQuotes);
+            sanitizeJsonKeys.AddProcessor(removeConsecutiveSpaces);
             sanitizeJsonKeys.AddProcessor(removeStartingSpaces);
             sanitizeJsonKeys.AddProcessor(removeTrailingSpaces);
 
