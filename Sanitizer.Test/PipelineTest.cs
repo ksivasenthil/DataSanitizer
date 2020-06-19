@@ -35,7 +35,7 @@ namespace Sanitizer.Test
 
             TestSubject.AddProcessor(sample1);
 
-            TestSubject.RemoveProcessor(1);
+            TestSubject.RemoveProcessor(0);
 
             Assert.True(0 == TestSubject.SequentialProcessor.Count);
         }
