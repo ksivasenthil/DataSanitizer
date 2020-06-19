@@ -8,10 +8,17 @@ namespace Sanitizer
         private string PatternToFind;
         private IProcessor NextInChain;
         private ProcessorResult CurrentResult;
+        public string ReplacementToken { get; private set; }
 
         public StringProcessor(string pattern, int index)
         {
             (this as IProcessor).Init(pattern, index);
+        }
+
+        public StringProcessor(string pattern, int index, string replacement)
+        {
+            (this as IProcessor).Init(pattern, index);
+            this.ReplacementToken = replacement;
         }
 
         ProcessorResult IProcessor.Result
