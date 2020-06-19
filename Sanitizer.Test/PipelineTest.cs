@@ -10,7 +10,6 @@ namespace Sanitizer.Test
     public class PipelineTest
     {
         private Pipeline TestSubject;
-
         public PipelineTest()
         {
             TestSubject = new Pipeline();
@@ -78,7 +77,7 @@ namespace Sanitizer.Test
                 .Results
                 .Select(r => r.ProcessIndex).ToList();
 
-            Assert.Equal(numbers.GetHashCode(), processingOrder.GetHashCode());
+            Assert.Equal(numbers, processingOrder);
             //TODO: All calls to the handlers should succeed.
         }
 
