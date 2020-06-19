@@ -20,7 +20,7 @@ namespace Sanitizer.Test
         public void AddProcessorSwellsTheProcessingChainBy1()
         {
             string pattern1 = "\r\n";
-            IProcessor sample1 = new StringProcessor(pattern1);
+            IProcessor sample1 = new StringProcessor(pattern1, 0);
 
             TestSubject.AddProcessor(sample1);
 
@@ -31,7 +31,7 @@ namespace Sanitizer.Test
         public void RemoveProcessorDeflatesTheProcessingChainBy1()
         {
             string pattern1 = "\r\n";
-            IProcessor sample1 = new StringProcessor(pattern1);
+            IProcessor sample1 = new StringProcessor(pattern1, 0);
 
             TestSubject.AddProcessor(sample1);
 
@@ -47,8 +47,8 @@ namespace Sanitizer.Test
             string pattern1 = "\r\n";
             string pattern2 = "\\$";
 
-            IProcessor sample1 = new StringProcessor(pattern1);
-            IProcessor sample2 = new StringProcessor(pattern2);
+            IProcessor sample1 = new StringProcessor(pattern1, 0);
+            IProcessor sample2 = new StringProcessor(pattern2, 1);
 
             TestSubject.AddProcessor(sample1);
             TestSubject.AddProcessor(sample2);
@@ -64,8 +64,8 @@ namespace Sanitizer.Test
             string input = "\r\n Hello$World \r\n";
             string pattern1 = "\r\n";
             string pattern2 = "\\$";
-            IProcessor sample1 = new StringProcessor(pattern1);
-            IProcessor sample2 = new StringProcessor(pattern2);
+            IProcessor sample1 = new StringProcessor(pattern1, 0);
+            IProcessor sample2 = new StringProcessor(pattern2, 1);
 
             TestSubject.AddProcessor(sample1);
             TestSubject.AddProcessor(sample2);
@@ -89,8 +89,8 @@ namespace Sanitizer.Test
             string pattern1 = "\r\n";
             string pattern2 = "\\&q/uot;";
 
-            IProcessor sample1 = new StringProcessor(pattern1);
-            IProcessor sample2 = new StringProcessor(pattern2);
+            IProcessor sample1 = new StringProcessor(pattern1, 0);
+            IProcessor sample2 = new StringProcessor(pattern2, 1);
 
             TestSubject.AddProcessor(sample1);
             TestSubject.AddProcessor(sample2);
@@ -107,9 +107,9 @@ namespace Sanitizer.Test
             string pattern2 = "\\$";
             string pattern3 = "\\&quot;";
 
-            IProcessor sample1 = new StringProcessor(pattern1);
-            IProcessor sample2 = new StringProcessor(pattern2);
-            IProcessor sample3 = new StringProcessor(pattern3);
+            IProcessor sample1 = new StringProcessor(pattern1, 0);
+            IProcessor sample2 = new StringProcessor(pattern2, 1);
+            IProcessor sample3 = new StringProcessor(pattern3, 2);
 
             TestSubject.AddProcessor(sample1);
             TestSubject.AddProcessor(sample2);
@@ -126,8 +126,8 @@ namespace Sanitizer.Test
             string input = "\r\n Hello$World \r\n";
             string pattern1 = "\r\n";
             string pattern2 = "\\$";
-            IProcessor sample1 = new StringProcessor(pattern1);
-            IProcessor sample2 = new StringProcessor(pattern2);
+            IProcessor sample1 = new StringProcessor(pattern1, 0);
+            IProcessor sample2 = new StringProcessor(pattern2, 1);
 
             TestSubject.AddProcessor(sample1);
             TestSubject.AddProcessor(sample2);
