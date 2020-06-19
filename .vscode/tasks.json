@@ -37,6 +37,19 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "test",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "/p:CollectCoverage=true",
+                "/p:CoverletOutputFormat=cobertura",
+                "/p:Exclude=\"[xunit*]\\*\"",
+                "/p:CoverletOutput=\"./TestResults/\""
+            ],
+            "problemMatcher": "$msCompile"
         }
     ]
 }
