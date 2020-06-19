@@ -17,9 +17,9 @@ namespace Sanitizer
             SequentialProcessor.Add(processor);
         }
 
-        public void RemoveProcessor(int id)
+        public void RemoveProcessor(int index)
         {
-            throw new NotImplementedException();
+            SequentialProcessor.RemoveAt(index);
         }
 
         public string Process(string input)
