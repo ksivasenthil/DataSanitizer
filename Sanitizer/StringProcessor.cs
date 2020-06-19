@@ -1,5 +1,7 @@
 namespace Sanitizer
 {
+    using System;
+    using System.Text.RegularExpressions;
     using Sanitizer.Contract;
     public class StringProcessor : IProcessor
     {
@@ -34,13 +36,23 @@ namespace Sanitizer
 
         string IProcessor.Process(string source)
         {
-            string processOutput = default(string);
-            bool thereAreMoreProcessor = null != this.NextInChain;
-            if (thereAreMoreProcessor)
+            try
             {
-                processOutput = this.NextInChain.Process(source);
+                string processOutput = default(string);
+                Regex matcher = new Regex(this.PatternToFind);
+                processOutput = matcher.Replace(source, string.Empty);
+                bool thereAreMoreProcessor = null != this.NextInChain;
+                if (thereAreMoreProcessor)
+                {
+                    processOutput = this.NextInChain.Process(source);
+                }
+                return processOutput;
             }
-            return processOutput;
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
+
         }
     }
 }
