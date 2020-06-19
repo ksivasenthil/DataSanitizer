@@ -8,6 +8,8 @@ namespace Sanitizer.Contract
 
         string Process(string source);
 
+        string Process(string source, string replacement);
+
         void Next(IProcessor nextInChain);
 
     }

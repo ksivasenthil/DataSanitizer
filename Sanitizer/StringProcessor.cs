@@ -36,6 +36,11 @@ namespace Sanitizer
 
         string IProcessor.Process(string source)
         {
+            return (this as IProcessor).Process(source, string.Empty);
+        }
+
+        string IProcessor.Process(string source, string replacement)
+        {
             try
             {
                 string processOutput = default(string);
@@ -52,7 +57,6 @@ namespace Sanitizer
             {
                 throw new ArgumentException(ex.Message);
             }
-
         }
     }
 }
