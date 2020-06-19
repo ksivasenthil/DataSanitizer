@@ -44,7 +44,7 @@ namespace Sanitizer
                 bool thereAreMoreProcessor = null != this.NextInChain;
                 if (thereAreMoreProcessor)
                 {
-                    processOutput = this.NextInChain.Process(source);
+                    processOutput = this.NextInChain.Process(processOutput);
                 }
                 return processOutput;
             }
