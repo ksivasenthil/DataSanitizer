@@ -11,7 +11,7 @@ namespace Sanitizer
 
         void IProcessor.Init(string pattern)
         {
-            throw new System.NotImplementedException();
+            this.PatternToFind = pattern;
         }
 
         void IProcessor.Next(IProcessor nextInChain)

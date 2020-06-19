@@ -6,15 +6,15 @@ namespace Sanitizer
     public class Pipeline
     {
         public List<IProcessor> SequentialProcessor { get; }
-        public List<ProcessorResult> Results { get; private set;}
+        public List<ProcessorResult> Results { get; private set; }
         public Pipeline()
         {
-            throw new NotImplementedException();
+            SequentialProcessor = new List<IProcessor>();
         }
 
         public void AddProcessor(IProcessor processor)
         {
-            throw new NotImplementedException();
+            SequentialProcessor.Add(processor);
         }
 
         public void RemoveProcessor(int id)
