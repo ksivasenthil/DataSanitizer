@@ -131,7 +131,7 @@ namespace Sanitizer.Test
 
             string resultOfProcessing = TestSubject.Process(input);
 
-            Assert.Equal(" Hello World ", resultOfProcessing);
+            Assert.Equal(" HelloWorld ", resultOfProcessing);
         }
     }
 }
