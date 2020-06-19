@@ -78,7 +78,6 @@ namespace Sanitizer.Test
                 .Select(r => r.ProcessIndex).ToList();
 
             Assert.Equal(numbers, processingOrder);
-            //TODO: All calls to the handlers should succeed.
         }
 
         [Fact]
@@ -86,7 +85,7 @@ namespace Sanitizer.Test
         {
             string input = "\r\n This is a &quot; setup &quot; \r\n";
             string pattern1 = "\r\n";
-            string pattern2 = "\\&q/uot;";
+            string pattern2 = "*";
 
             IProcessor sample1 = new StringProcessor(pattern1, 0);
             IProcessor sample2 = new StringProcessor(pattern2, 1);
@@ -95,7 +94,7 @@ namespace Sanitizer.Test
             TestSubject.AddProcessor(sample2);
 
             Assert.Throws<ArgumentException>(() => TestSubject.Process(input));
-            //TODO: On failure no subsequent processing should be performed.
+            Assert.True(0 == TestSubject.Results.Count);
         }
 
         [Fact]
@@ -116,14 +115,13 @@ namespace Sanitizer.Test
 
             TestSubject.Process(input);
             Assert.True(3 == TestSubject.Results.Count);
-            //TODO: Each handler result should be captured and appended to a common property.
         }
 
         [Fact]
         public void PipelineResultIsAsExpected()
         {
             string input = "\r\n Hello$World \r\n";
-            string pattern1 = "\r\n";
+            string pattern1 = "\\r\\n";
             string pattern2 = "\\$";
             IProcessor sample1 = new StringProcessor(pattern1, 0);
             IProcessor sample2 = new StringProcessor(pattern2, 1);
@@ -134,7 +132,6 @@ namespace Sanitizer.Test
             string resultOfProcessing = TestSubject.Process(input);
 
             Assert.Equal(" Hello World ", resultOfProcessing);
-            //TODO: Pipeline has processed the result appropriately.
         }
     }
 }
