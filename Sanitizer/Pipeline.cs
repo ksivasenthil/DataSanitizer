@@ -10,6 +10,7 @@ namespace Sanitizer
         public Pipeline()
         {
             SequentialProcessor = new List<IProcessor>();
+            Results = new List<ProcessorResult>();
         }
 
         public void AddProcessor(IProcessor processor)
@@ -24,8 +25,31 @@ namespace Sanitizer
 
         public string Process(string input)
         {
-            throw new NotImplementedException();
+            for (int index = 0;
+                this.SequentialProcessor.Count > index;
+                index++)
+            {
+                IProcessor current = this.SequentialProcessor[index];
+                IProcessor next = default(IProcessor);
+                bool notAtEndOfChain = this.SequentialProcessor.Count > index + 1;
+                if (notAtEndOfChain)
+                {
+                    next = this.SequentialProcessor[index + 1];
+                }
+                current.Next(next);
+            }
+            string response = this.SequentialProcessor[0].Process(input);
+            this.HarvestResult();
+            return response;
         }
 
+        private void HarvestResult()
+        {
+            foreach (IProcessor processor
+             in this.SequentialProcessor)
+            {
+                Results.Add(processor.Result);
+            }
+        }
     }
 }

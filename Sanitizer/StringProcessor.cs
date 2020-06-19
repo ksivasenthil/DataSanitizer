@@ -4,24 +4,43 @@ namespace Sanitizer
     public class StringProcessor : IProcessor
     {
         private string PatternToFind;
-        public StringProcessor(string pattern)
+        private IProcessor NextInChain;
+        private ProcessorResult CurrentResult;
+
+        public StringProcessor(string pattern, int index)
         {
-            (this as IProcessor).Init(pattern);
+            (this as IProcessor).Init(pattern, index);
         }
 
-        void IProcessor.Init(string pattern)
+        ProcessorResult IProcessor.Result
         {
+            get => CurrentResult;
+        }
+
+        void IProcessor.Init(string pattern, int index)
+        {
+            CurrentResult = new ProcessorResult()
+            {
+                ProcessIndex = index,
+                StageResult = default(string)
+            };
             this.PatternToFind = pattern;
         }
 
         void IProcessor.Next(IProcessor nextInChain)
         {
-            throw new System.NotImplementedException();
+            this.NextInChain = nextInChain;
         }
 
         string IProcessor.Process(string source)
         {
-            throw new System.NotImplementedException();
+            string processOutput = default(string);
+            bool thereAreMoreProcessor = null != this.NextInChain;
+            if (thereAreMoreProcessor)
+            {
+                processOutput = this.NextInChain.Process(source);
+            }
+            return processOutput;
         }
     }
 }
