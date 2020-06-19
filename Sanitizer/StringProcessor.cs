@@ -13,6 +13,7 @@ namespace Sanitizer
         public StringProcessor(string pattern, int index)
         {
             (this as IProcessor).Init(pattern, index);
+            this.ReplacementToken = string.Empty;
         }
 
         public StringProcessor(string pattern, int index, string replacement)
@@ -43,7 +44,10 @@ namespace Sanitizer
 
         string IProcessor.Process(string source)
         {
-            return (this as IProcessor).Process(source, string.Empty);
+            return (this as IProcessor)
+                .Process(
+                    source,
+                    this.ReplacementToken);
         }
 
         string IProcessor.Process(string source, string replacement)
