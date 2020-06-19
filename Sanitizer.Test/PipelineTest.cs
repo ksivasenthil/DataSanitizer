@@ -72,7 +72,7 @@ namespace Sanitizer.Test
 
             string resultOfProcessing = TestSubject.Process(input);
 
-            List<int> numbers = new List<int>() { 1, 2 };
+            List<int> numbers = new List<int>() { 0, 1 };
 
             List<int> processingOrder = TestSubject
                 .Results
