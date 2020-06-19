@@ -2,7 +2,9 @@ namespace Sanitizer.Contract
 {
     public interface IProcessor
     {
-        string Process(string source, string pattern);
+        void Init(string pattern);
+
+        string Process(string source);
 
         void Next(IProcessor nextInChain);
 

@@ -6,14 +6,20 @@ namespace Sanitizer
         private string PatternToFind;
         public StringProcessor(string pattern)
         {
-
+            (this as IProcessor).Init(pattern);
         }
+
+        void IProcessor.Init(string pattern)
+        {
+            throw new System.NotImplementedException();
+        }
+
         void IProcessor.Next(IProcessor nextInChain)
         {
             throw new System.NotImplementedException();
         }
 
-        string IProcessor.Process(string source, string pattern)
+        string IProcessor.Process(string source)
         {
             throw new System.NotImplementedException();
         }
