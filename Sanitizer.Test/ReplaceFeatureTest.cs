@@ -44,7 +44,7 @@ namespace Sanitizer.Test
 
             string resultOfProcessing = TestSubject.Process(input);
 
-            Assert.Equal("+ HelloWorld ' You ' +", resultOfProcessing);
+            Assert.Equal("+ Hello World ' You ' +", resultOfProcessing);
         }
     }
 }
